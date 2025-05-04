@@ -1,0 +1,35 @@
+<app-header></app-header>
+<div class="container">
+
+    <div class="imagem_container">
+        <div class="imagem">
+            <img src="/planta.png" alt="">
+        </div>
+
+        <div class="content">
+
+            <h1>Level {{level}} Suculenta</h1>
+            <div class="descricao">
+                {{falta}} points to the level {{level + 1}} morangueira
+            </div>
+        </div>
+    </div>
+    <button (click)="goToMenu()">Get Started</button>
+
+
+    <div class="streak">
+        <div class="title">
+            {{ calcularStreak() }} days streak, keep up!
+        </div>
+        <span>Way to go.</span>
+        <ul class="timeline">
+            <li *ngFor="let d of gerarSemanaAtual()">
+              <div class="day">{{ d.dia }}</div>
+              <div class="circle" [class.green]="d.valido"></div>
+            </li>
+          </ul>
+    </div>
+    <div class="menu">
+
+    </div>
+</div>

@@ -1,0 +1,18 @@
+<div class="container">
+    <div class="left">
+        <div class="avatar">
+            <div class="img">{{letter}}</div>
+        </div>
+        <div class="text">
+
+            <span>{{ getSaudacao() }}</span>
+            <h1>{{userName}}</h1>
+        </div>
+    </div>
+    <div class="right">
+        <fa-icon [icon]="faFireFlameCurved"></fa-icon>
+
+        <div class="icon">{{calcularStreak()}}</div>
+    </div>
+   
+</div>

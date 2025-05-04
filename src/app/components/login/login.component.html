@@ -1,0 +1,30 @@
+<div class="container" [formGroup]="loginForm">
+    <h1 class="title">VERDAVIA</h1>
+    <form (submit)="onSubmit()">
+      <span>Login to your account</span>
+      <label for="email">E-mail</label>
+      <input type="email" id="email" placeholder="Type your e-mail..." formControlName="email">
+      <label for="password">Password</label>
+      <input type="password" id="password" placeholder="********" formControlName="password">
+      <span class="forgot">Forgot password?</span>
+      <input type="submit" value="Sign In">
+    </form>
+  
+    <div class="social">
+      <span>Or sign with</span>
+      <div class="icons">
+        <div class="icon apple">
+          <img src="/apple.png" alt="">
+        </div>
+        <div class="icon google">
+          <img src="/google.webp" alt="">
+        </div>
+        <div class="icon facebook">
+          <img src="/facebook.png" alt="">
+        </div>
+      </div>
+    </div>
+  
+    <span class="signup">Dont have an account <span (click)="signup()">Sign up</span></span>
+  </div>
+  

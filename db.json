@@ -1,0 +1,67 @@
+{
+  "usuarios": [
+    {
+      "id": "1",
+      "nome": "Josue",
+      "email": "josue@gmail.com",
+      "password": "12345",
+      "pontos": 6,
+      "nivel": 1
+    },
+    {
+      "id": "2",
+      "nome": "luiza",
+      "email": "luiza@gmail.com",
+      "password": "12345",
+      "pontos": 0,
+      "nivel": 0
+    }
+  ],
+  "tarefas": [
+    {
+      "id": "1",
+      "id_user": 1,
+      "data": "2025-05-02",
+      "agua": 1000,
+      "sol": false,
+      "alimentacao": true,
+      "sono": 8,
+      "ar_puro": true,
+      "exercicio": [
+        "sim",
+        "30"
+      ],
+      "temperanca": false,
+      "espiritualidade": true
+    },
+    {
+      "id": "2",
+      "id_user": 1,
+      "data": "2025-05-03",
+      "agua": 1500,
+      "sol": true,
+      "alimentacao": false,
+      "sono": 420,
+      "ar_puro": true,
+      "exercicio": [
+        "sim",
+        "30"
+      ],
+      "espiritualidade": true,
+      "temperanca": true
+    },
+    {
+      "id": "d19d",
+      "id_user": "1",
+      "data": "2025/05/04",
+      "agua": 0,
+      "sono": 0,
+      "sol": true,
+      "alimentacao": false,
+      "ar_puro": false,
+      "exercicio": true,
+      "temperança": false,
+      "espiritualidade": false
+    }
+  ]
+}

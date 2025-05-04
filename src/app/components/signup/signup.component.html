@@ -1,0 +1,22 @@
+<div class="container" [formGroup]="loginForm">
+    <h1 class="title">VERDAVIA</h1>
+    <form (submit)="onSubmit()">
+      <span>Create your account</span>
+      <label for="nome">Name</label>
+      <input type="text" id="nome" placeholder="Your name" formControlName="nome">
+      <label for="email">E-mail</label>
+      <input type="email" id="email" placeholder="Type your e-mail..." formControlName="email">
+      <label for="password">Password</label>
+      <input type="password" id="password" placeholder="********" formControlName="password">
+      <label for="confirm">Confirm your password</label>
+      <input type="password" id="confirm" placeholder="********" formControlName="confirm">
+     
+      <span class="forgot">Forgot password?</span>
+      <input type="submit" value="Sign In">
+    </form>
+  
+   
+  
+    <span class="signup">Already have an account <span (click)="login()">Log in</span></span>
+  </div>
+  

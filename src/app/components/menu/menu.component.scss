@@ -1,0 +1,214 @@
+@import "../../../styles.scss";
+
+.container{
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  height: 100vh;
+  background: $background;
+  flex-direction: column;
+  padding: 24px;
+  gap: 50px;
+  overflow: hidden;
+  .title{
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+ 
+  
+  .progresso{
+    h1{
+      font-size: 1.5rem;
+    }
+    width: 100%;
+    .barra_container{
+      position: relative;
+      .barra{
+        width: 100%;
+        height: 15px;
+        background-color: rgb(239, 239, 239);
+        border-radius: 50px;
+      }
+      .volume{
+        position: absolute;
+        top: 0;
+        width: 30%;
+        height: 15px;
+        background-color: rgb(93, 188, 50);
+        border-radius: 50px;
+
+      }
+    }
+    .footer{
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 10px;
+      span{
+        font-size: .8rem;
+        color: $gray;
+      }
+
+      .count{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        list-style: none;
+        gap: 10px;
+        color: rgb(172, 172, 172);
+        .active{
+          color: rgb(48, 169, 8);
+        }
+      }
+    }
+  }
+  .back{
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid $gray;
+    border-radius: 50%;
+    color: $gray;
+  }
+}
+swiper-container {
+  width: 300px;
+  height: 400px;
+}
+
+swiper-slide {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: column;
+  border-radius: 18px;
+  font-size: 22px;
+  font-weight: bold;
+  color: #fff;
+  padding: 24px;
+
+  .header{
+    width: 100%;
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    fa-icon{
+      width: 50px;
+      height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid $white;
+      border-radius: 50%;
+    }
+  }
+  .progress{
+    display: flex;
+    flex-direction: column;
+    .title{
+      margin: 0;
+    }
+    span{
+      font-weight: 300;
+    }
+  }
+  .content{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    .qtd{
+      width: 100%;
+      font-size: 1.3rem;
+      font-weight: 300;
+      text-align: center;
+    }
+  }
+  .count{
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    .number{
+      height: 40px;
+      width: auto;
+      border: 1px solid $white;
+      padding: 0 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 300;
+    }
+    .decrease, .increase{
+      width: 40px;
+      height: 40px;
+      border: 1px solid $white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+  .buttons{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 10px;
+  }
+
+  button{
+    width: 100%;
+    height: 40px;
+    padding: 10px 20px;
+    border-radius: 50px;
+    border: none;
+  }
+}
+
+swiper-slide:nth-child(1n) {
+  background-color: rgb(63, 77, 187);
+}
+
+swiper-slide:nth-child(2n) {
+  background-color: rgb(0, 140, 255);
+}
+
+swiper-slide:nth-child(3n) {
+  background-color: rgb(10, 184, 111);
+}
+
+swiper-slide:nth-child(4n) {
+  background-color: rgb(211, 122, 7);
+}
+
+swiper-slide:nth-child(5n) {
+  background-color: rgb(118, 163, 12);
+}
+
+swiper-slide:nth-child(6n) {
+  background-color: rgb(180, 10, 47);
+}
+
+swiper-slide:nth-child(7n) {
+  background-color: rgb(35, 99, 19);
+}
+
+swiper-slide:nth-child(8n) {
+  background-color: rgb(0, 68, 255);
+}
+
+swiper-slide:nth-child(9n) {
+  background-color: rgb(218, 12, 218);
+}
+
+swiper-slide:nth-child(10n) {
+  background-color: rgb(54, 94, 77);
+}
