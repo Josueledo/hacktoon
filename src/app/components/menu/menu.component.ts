@@ -7,11 +7,13 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faCoffee, faArrowLeft, faDroplet, faSun, faDumbbell, faWind, faBible, faScaleBalanced, faCarrot, faChevronLeft, faMoon, faCheck,faLightbulb } from '@fortawesome/free-solid-svg-icons';
 import { Router } from '@angular/router';
 import { UserService } from '../../services/user.service';
+import { ToastrModule, ToastrService } from 'ngx-toastr';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @Component({
   selector: 'app-menu',
   standalone: true,
-  imports: [CommonModule, FontAwesomeModule],
+  imports: [CommonModule, FontAwesomeModule,CommonModule],
   templateUrl: './menu.component.html',
   styleUrl: './menu.component.scss',
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
@@ -61,7 +63,7 @@ export class MenuComponent {
   ];
 
 
-  constructor(@Inject(PLATFORM_ID) private platformId: Object) {
+  constructor(@Inject(PLATFORM_ID) private platformId: Object,private toastr: ToastrService) {
     const dataAtual = new Date();
     const ano = dataAtual.getFullYear();
     const mes = String(dataAtual.getMonth() + 1).padStart(2, '0');
@@ -109,20 +111,31 @@ export class MenuComponent {
       this.tasksHoje[0].espiritualidade === true
     ){
       console.log("completa")
-      this.userService.updatePontos(this.user.id,this.user.pontos + 1).subscribe({
-        next:(data) =>{
-          if(this.user.pontos === 7 && this.user.nivel === 1){
-            this.userService.updateLevel(this.user.id,this.user.level + 1).subscribe({
-              next: (data) =>{
-                console.log("Level Up")
-              }
-            })
+      if(this.user.pontos + 1 === 7 && this.user.nivel === 1){
+        this.userService.updateLevel(this.user.id,this.user.nivel + 1).subscribe({
+          next:(data) =>{
+           console.log("Level UP")
           }
-        }
-      })
+        })
+        this.userService.updatePontos(this.user.id,this.user.pontos + 1).subscribe({
+          next:(data) =>{
+            console.log("Mais um ponto")
+
+          }
+        })
+      }else{
+        this.userService.updatePontos(this.user.id,this.user.pontos + 1).subscribe({
+          next:(data) =>{
+            console.log("Mais um ponto")
+
+          }
+        })
+      }
     }
   }
-
+  mostrarToast() {
+    this.toastr.success('Salvo!', 'Sucesso');
+  }
 
   back() {
     this.router.navigate(["/home"])
@@ -175,6 +188,7 @@ export class MenuComponent {
       next: (data) => {
         console.log(data)
         this.checkTaskCompleted()
+        this.mostrarToast()
       }
     })
   }

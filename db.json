@@ -5,7 +5,7 @@
       "nome": "Josue",
       "email": "josue@gmail.com",
       "password": "12345",
-      "pontos": 6,
+      "pontos": 3,
       "nivel": 1
     },
     {
@@ -67,14 +67,14 @@
       "id": "b29f",
       "id_user": "1",
       "data": "2025/05/05",
-      "agua": 500,
+      "agua": 750,
       "sono": 30,
       "sol": true,
       "alimentacao": true,
       "ar_puro": true,
       "exercicio": true,
       "temperanca": true,
-      "espiritualidade": false
+      "espiritualidade": true
     }
   ]
 }

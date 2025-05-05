@@ -33,7 +33,6 @@ export class UserComponent {
         if (userString) {
           this.user = JSON.parse(userString);
           this.level = this.user.nivel;
-          console.log(this.level)
         }
       }
     }

@@ -6,7 +6,7 @@ import { Observable, map, of, switchMap } from 'rxjs';
   providedIn: 'root'
 })
 export class TarefaService {
-  private taskUrl = 'http://localhost:3000/tarefas';
+  private taskUrl = 'http://192.168.4.103:3000/tarefas';
 
   constructor(private http: HttpClient) { }
 

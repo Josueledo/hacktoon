@@ -28,7 +28,7 @@ export class LoginComponent {
     this.userService.getAll().subscribe({
       next(data) {
         console.log(data)
-        
+
       },
     })
   }
@@ -39,10 +39,9 @@ export class LoginComponent {
       if (users.length > 0) {
         localStorage.setItem('user', JSON.stringify(users[0]));
         this.loginForm.reset()
-        alert("aqui")
         this.router.navigate(['/home']);
       } else {
-        alert("Invalidos")
+        alert("Credenciais inválidas")
         console.log('Credenciais inválidas');
         this.loginForm.reset()
       }
