@@ -17,6 +17,15 @@ export class UserService {
   createUser(user: any) {
     return this.http.post(`${this.userUrl}`, user);
   }
+  updatePontos(id: number, pontos: boolean): Observable<any> {
+
+    return this.http.patch(`${this.userUrl}/${id}`, { pontos });
+  }
+  updateLevel(id: number, nivel: boolean): Observable<any> {
+    return this.http.patch(`${this.userUrl}/${id}`, { nivel });
+  }
+
+
   login(email: string, password: string): Observable<any> {
     return this.http.get<any[]>(`${this.userUrl}?email=${email}&password=${password}`);
   }

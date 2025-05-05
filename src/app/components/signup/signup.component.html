@@ -1,22 +1,21 @@
 <div class="container" [formGroup]="loginForm">
     <h1 class="title">VERDAVIA</h1>
     <form (submit)="onSubmit()">
-      <span>Create your account</span>
-      <label for="nome">Name</label>
-      <input type="text" id="nome" placeholder="Your name" formControlName="nome">
+      <span>Crie sua conta!</span>
+      <label for="nome">Nome</label>
+      <input type="text" id="nome" placeholder="Seu nome" formControlName="nome">
       <label for="email">E-mail</label>
-      <input type="email" id="email" placeholder="Type your e-mail..." formControlName="email">
-      <label for="password">Password</label>
+      <input type="email" id="email" placeholder="Digite seuu e-mail..." formControlName="email">
+      <label for="password">Senha</label>
       <input type="password" id="password" placeholder="********" formControlName="password">
-      <label for="confirm">Confirm your password</label>
+      <label for="confirm">Confirme sua senha</label>
       <input type="password" id="confirm" placeholder="********" formControlName="confirm">
-     
-      <span class="forgot">Forgot password?</span>
+
+      <span class="forgot">Esqueceu a senha?</span>
       <input type="submit" value="Sign In">
     </form>
-  
-   
-  
-    <span class="signup">Already have an account <span (click)="login()">Log in</span></span>
+
+
+
+    <span class="signup">Possui conta? <span (click)="login()">Entrar</span></span>
   </div>
-  

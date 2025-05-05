@@ -4,8 +4,9 @@ import { TarefaService } from '../../services/tarefa.service';
 import { isPlatformBrowser } from '@angular/common';
 import { HeaderComponent } from '../header/header.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { faCoffee, faArrowLeft, faDroplet, faSun, faDumbbell, faWind, faBible, faScaleBalanced, faCarrot, faChevronLeft, faMoon } from '@fortawesome/free-solid-svg-icons';
+import { faCoffee, faArrowLeft, faDroplet, faSun, faDumbbell, faWind, faBible, faScaleBalanced, faCarrot, faChevronLeft, faMoon, faCheck,faLightbulb } from '@fortawesome/free-solid-svg-icons';
 import { Router } from '@angular/router';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-menu',
@@ -19,11 +20,13 @@ export class MenuComponent {
 
   isVisible = false
   taskService = inject(TarefaService)
+  userService = inject(UserService)
   router = inject(Router)
   hoje: string = ''
   tasks: any[] = []
-  tasksHoje: any[] = []
+  tasksHoje: any = []
   faCoffee = faCoffee;
+  faCheck = faCheck
   faArrowLeft = faArrowLeft
   faDroplet = faDroplet
   faMoon = faMoon
@@ -34,6 +37,7 @@ export class MenuComponent {
   faBible = faBible
   faScaleBalanced = faScaleBalanced
   faChevronLeft = faChevronLeft
+  faLightbulb = faLightbulb
   agualml: number = 0
   concluidos = 0
   user: any = ''
@@ -51,7 +55,7 @@ export class MenuComponent {
     'exercicio',
     'ar_puro',
     'espiritualidade',
-    'temperança',
+    'temperanca',
     'alimentacao',
     'sol'
   ];
@@ -70,20 +74,15 @@ export class MenuComponent {
       const userString = localStorage.getItem('user');
       if (userString) {
         this.user = JSON.parse(userString);
+        console.log(this.user)
         this.getAll()
       }
     }
-    // colocar logica para caso nao tenha task do dia que seja criada.
   }
 
   get passosCompletos(): number {
     return this.steps.filter(chave => this.ehConcluido(chave)).length;
   }
-
-
-
-
-
 
   ehConcluido(chave: string): boolean {
     const task = this.tasksHoje?.[0];
@@ -98,25 +97,60 @@ export class MenuComponent {
     return valor === true;
   }
 
+  checkTaskCompleted(){
+    if(
+      this.tasksHoje[0].agua !== 0 &&
+      this.tasksHoje[0].sono !== 0 &&
+      this.tasksHoje[0].sol === true &&
+      this.tasksHoje[0].alimentacao === true &&
+      this.tasksHoje[0].ar_puro === true &&
+      this.tasksHoje[0].exercicio === true &&
+      this.tasksHoje[0].temperanca === true &&
+      this.tasksHoje[0].espiritualidade === true
+    ){
+      console.log("completa")
+      this.userService.updatePontos(this.user.id,this.user.pontos + 1).subscribe({
+        next:(data) =>{
+          if(this.user.pontos === 7 && this.user.nivel === 1){
+            this.userService.updateLevel(this.user.id,this.user.level + 1).subscribe({
+              next: (data) =>{
+                console.log("Level Up")
+              }
+            })
+          }
+        }
+      })
+    }
+  }
+
 
   back() {
     this.router.navigate(["/home"])
   }
   increase() {
     this.agualml += 250
+    this.updateAgua()
+    this.checkTaskCompleted()
   }
   decrease() {
-    if (this.agualml > 0) {
+    if (this.agualml > 250) {
       this.agualml -= 250
+      this.updateAgua()
+      this.checkTaskCompleted()
+
     }
   }
   increaseSono() {
     this.sono += 30;
+    this.updateSono()
+    this.checkTaskCompleted()
+
   }
 
   decreaseSono() {
     if (this.sono >= 30) {
       this.sono -= 30;
+      this.updateSono()
     }
   }
 
@@ -126,12 +160,13 @@ export class MenuComponent {
     return `${horas}:${mins.toString().padStart(2, '0')}`;
   }
 
+
   updateAgua() {
-    console.log(this.tasksHoje)
     this.taskService.updateAgua(this.tasksHoje[0].id, this.agualml).subscribe({
       next: (data) => {
         console.log(data)
-        alert("salvo")
+        this.checkTaskCompleted()
+
       }
     })
   }
@@ -139,7 +174,7 @@ export class MenuComponent {
     this.taskService.updateSol(this.tasksHoje[0].id, res).subscribe({
       next: (data) => {
         console.log(data)
-        alert("salvo")
+        this.checkTaskCompleted()
       }
     })
   }
@@ -148,7 +183,7 @@ export class MenuComponent {
     this.taskService.updateExercicio(this.tasksHoje[0].id, res).subscribe({
       next: (data) => {
         console.log(data)
-        alert("salvo")
+        this.checkTaskCompleted()
       }
     })
   }
@@ -156,7 +191,7 @@ export class MenuComponent {
     this.taskService.updateAr(this.tasksHoje[0].id, res).subscribe({
       next: (data) => {
         console.log(data)
-        alert("salvo")
+        this.checkTaskCompleted()
       }
     })
   }
@@ -164,7 +199,7 @@ export class MenuComponent {
     this.taskService.updateEspiritualidade(this.tasksHoje[0].id, res).subscribe({
       next: (data) => {
         console.log(data)
-        alert("salvo")
+        this.checkTaskCompleted()
       }
     })
   }
@@ -172,7 +207,7 @@ export class MenuComponent {
     this.taskService.updateTemperanca(this.tasksHoje[0].id, res).subscribe({
       next: (data) => {
         console.log(data)
-        alert("salvo")
+        this.checkTaskCompleted()
       }
     })
   }
@@ -180,7 +215,7 @@ export class MenuComponent {
     this.taskService.updateSono(this.tasksHoje[0].id,this.sono ).subscribe({
       next: (data) => {
         console.log(data)
-        alert("salvo")
+        this.checkTaskCompleted()
       }
     })
   }
@@ -188,7 +223,7 @@ export class MenuComponent {
     this.taskService.updateAlimentacao(this.tasksHoje[0].id, res).subscribe({
       next: (data) => {
         console.log(data)
-        alert("salvo")
+        this.checkTaskCompleted()
       }
     })
   }
@@ -202,6 +237,7 @@ export class MenuComponent {
 
           if (this.tasks[0][i].data === this.hoje && parseInt(this.tasks[0][i].id_user,10) === parseInt(this.user.id, 10)) {
             this.tasksHoje.push(this.tasks[0][i])
+            console.log(this.tasksHoje)
             this.agualml = this.tasksHoje[0].agua
             this.sono = this.tasksHoje[0].sono
           }

@@ -1,6 +1,6 @@
 <div class="container">
     <div class="left">
-        <div class="avatar">
+        <div class="avatar" (click)="goToUser()">
             <div class="img">{{letter}}</div>
         </div>
         <div class="text">
@@ -12,7 +12,7 @@
     <div class="right">
         <fa-icon [icon]="faFireFlameCurved"></fa-icon>
 
-        <div class="icon">{{calcularStreak()}}</div>
+        <div class="icon">{{ currentStreak }}</div>
     </div>
-   
+
 </div>

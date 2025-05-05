@@ -1,17 +1,17 @@
 <div class="container" [formGroup]="loginForm">
     <h1 class="title">VERDAVIA</h1>
     <form (submit)="onSubmit()">
-      <span>Login to your account</span>
+      <span>Entre com sua conta!</span>
       <label for="email">E-mail</label>
-      <input type="email" id="email" placeholder="Type your e-mail..." formControlName="email">
-      <label for="password">Password</label>
+      <input type="email" id="email" placeholder="Digite seu e-mail..." formControlName="email">
+      <label for="password">Senha</label>
       <input type="password" id="password" placeholder="********" formControlName="password">
-      <span class="forgot">Forgot password?</span>
+      <span class="forgot">Esqueceu a senha?</span>
       <input type="submit" value="Sign In">
     </form>
-  
+
     <div class="social">
-      <span>Or sign with</span>
+      <span>Ou entre com:</span>
       <div class="icons">
         <div class="icon apple">
           <img src="/apple.png" alt="">
@@ -24,7 +24,6 @@
         </div>
       </div>
     </div>
-  
-    <span class="signup">Dont have an account <span (click)="signup()">Sign up</span></span>
+
+    <span class="signup">Não tem conta? <span (click)="signup()">Cadastrar</span></span>
   </div>
-  

@@ -1,6 +1,6 @@
 @import "../../../styles.scss";
 
-.container{
+.container {
   width: 100%;
   display: flex;
   align-items: center;
@@ -11,29 +11,36 @@
   padding: 24px;
   gap: 50px;
   overflow: hidden;
-  .title{
+  position: relative;
+
+  .title {
     display: flex;
     align-items: center;
     justify-content: start;
     gap: 16px;
     margin-bottom: 24px;
   }
- 
-  
-  .progresso{
-    h1{
-      font-size: 1.5rem;
+
+
+  .progresso {
+    h1 {
+      font-size: 1.2rem;
+      color: rgb(71, 71, 71);
     }
+
     width: 100%;
-    .barra_container{
+
+    .barra_container {
       position: relative;
-      .barra{
+
+      .barra {
         width: 100%;
         height: 15px;
         background-color: rgb(239, 239, 239);
         border-radius: 50px;
       }
-      .volume{
+
+      .volume {
         position: absolute;
         top: 0;
         width: 30%;
@@ -43,31 +50,35 @@
 
       }
     }
-    .footer{
+
+    .footer {
       width: 100%;
       display: flex;
       align-items: center;
       justify-content: space-between;
       margin-top: 10px;
-      span{
+
+      span {
         font-size: .8rem;
         color: $gray;
       }
 
-      .count{
+      .count {
         display: flex;
         align-items: center;
         justify-content: center;
         list-style: none;
         gap: 10px;
         color: rgb(172, 172, 172);
-        .active{
+
+        .active {
           color: rgb(48, 169, 8);
         }
       }
     }
   }
-  .back{
+
+  .back {
     width: 60px;
     height: 60px;
     display: flex;
@@ -77,7 +88,27 @@
     border-radius: 50%;
     color: $gray;
   }
+  .tips{
+    width: calc(100% - 48px);
+    height: 72px;
+    display: flex;
+    align-items: start;
+    justify-content: center;
+    background-color: #F2F2F7;
+    border: 1px solid #FFCC00;
+    border-radius: 10px;
+    padding: 16px;
+    gap: 16px;
+    font-size: 14px;
+    position: absolute;
+    bottom: 24px;
+    fa-icon{
+      color:#FFCC00;
+      font-size: 1.3rem;
+    }
+  }
 }
+
 swiper-container {
   width: 300px;
   height: 400px;
@@ -86,7 +117,7 @@ swiper-container {
 swiper-slide {
   width: 100%;
   display: flex;
-  align-items: center;
+  align-items: start;
   justify-content: space-between;
   flex-direction: column;
   border-radius: 18px;
@@ -95,120 +126,190 @@ swiper-slide {
   color: #fff;
   padding: 24px;
 
-  .header{
+  .header {
     width: 100%;
     height: auto;
     display: flex;
     align-items: center;
-    justify-content: end;
-    fa-icon{
+    justify-content: space-between;
+
+    fa-icon {
       width: 50px;
       height: 50px;
       display: flex;
       align-items: center;
       justify-content: center;
-      border: 1px solid $white;
       border-radius: 50%;
     }
-  }
-  .progress{
-    display: flex;
-    flex-direction: column;
-    .title{
+    .title {
       margin: 0;
-    }
-    span{
-      font-weight: 300;
+      font-weight: 400;
+      font-size: .8rem;
     }
   }
-  .content{
+
+  .progress {
     display: flex;
     flex-direction: column;
-    gap: 20px;
 
-    .qtd{
+
+  }
+  span {
+    font-weight: 300;
+    font-size: 1.7rem;
+  }
+
+  .content {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    width: 100%;
+    justify-content: space-between;
+    height: 100%;
+
+    .progress{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      line-height: 30px;
+      .title{
+        text-align: center;
+      }
+      span{
+        color: rgb(233, 232, 232);
+        text-align: center;
+      }
+    }
+
+    .qtd {
       width: 100%;
-      font-size: 1.3rem;
+      font-size: 1.7rem;
       font-weight: 300;
       text-align: center;
+      margin-top: 24px;
     }
   }
-  .count{
+
+  .count {
     display: flex;
     width: 100%;
     align-items: center;
     justify-content: center;
-    .number{
-      height: 40px;
-      width: auto;
-      border: 1px solid $white;
+    background-color: $white;
+    border-radius: 10px;
+
+    .number {
+      height: 48px;
+      width: 100%;
       padding: 0 20px;
       display: flex;
       align-items: center;
       justify-content: center;
       font-weight: 300;
+      color:rgb(39, 90, 184) ;
+
     }
-    .decrease, .increase{
-      width: 40px;
-      height: 40px;
-      border: 1px solid $white;
+
+    .decrease,
+    .increase {
+      width: 100%;
+      height: 48px;
       display: flex;
       align-items: center;
       justify-content: center;
+      color:rgb(45, 93, 184) ;
+      font-size: 1.8rem;
+
+    }
+    .decrease{
+      border-top-left-radius:10px;
     }
   }
-  .buttons{
+
+  .buttons {
     display: flex;
     flex-direction: column;
     width: 100%;
     gap: 10px;
   }
 
-  button{
+  button {
     width: 100%;
-    height: 40px;
-    padding: 10px 20px;
-    border-radius: 50px;
+    height: 48px;
+    padding: 14px 20px;
+    border-radius: 10px;
     border: none;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.144);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-size: 18px;
+    font-weight: 600;
+    fa-icon{
+      font-weight: bold;
+      font-size: 1.5rem;
+    }
   }
 }
 
 swiper-slide:nth-child(1n) {
-  background-color: rgb(63, 77, 187);
+  background: linear-gradient(190deg, rgb(78, 134, 238) 0%, rgb(50, 120, 211)100%);
+
+box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.116);
+button{
+  color: rgb(78, 134, 238);
+}
 }
 
 swiper-slide:nth-child(2n) {
-  background-color: rgb(0, 140, 255);
+  background: linear-gradient(190deg, #FF3B30 0%, #e9362d 100%);
+  button{
+    color: #FF3B30;
+  }
 }
 
 swiper-slide:nth-child(3n) {
-  background-color: rgb(10, 184, 111);
+  background: linear-gradient(190deg, rgb(218, 174, 54) 0%, rgb(167, 141, 30) 100%);
+  button{
+    color: rgb(218, 174, 54);
+  }
 }
 
 swiper-slide:nth-child(4n) {
-  background-color: rgb(211, 122, 7);
+  background: linear-gradient(190deg, rgb(88, 59, 218) 0%, rgb(74, 39, 170) 100%);
+  button{
+    color: rgb(88, 59, 218) ;
+  }
 }
 
 swiper-slide:nth-child(5n) {
-  background-color: rgb(118, 163, 12);
+  background: rgb(132, 170, 27);
+  button{
+    color:rgb(132, 170, 27);
+  }
 }
 
 swiper-slide:nth-child(6n) {
-  background-color: rgb(180, 10, 47);
+  background: linear-gradient(190deg, rgb(135, 36, 173) 0%, rgb(129, 39, 170) 100%);
+  button{
+    color: rgb(135, 36, 173);
+  }
 }
 
 swiper-slide:nth-child(7n) {
-  background-color: rgb(35, 99, 19);
+  background: linear-gradient(190deg, rgb(76, 175, 63) 0%, rgb(54, 116, 36) 100%);
+  button{
+    color:  rgb(76, 175, 63);
+  }
 }
 
 swiper-slide:nth-child(8n) {
-  background-color: rgb(0, 68, 255);
+  background: linear-gradient(190deg, rgb(138, 161, 134) 0%, rgb(115, 153, 107) 100%);
+  button{
+    color:  rgb(115, 153, 107);
+  }
 }
 
-swiper-slide:nth-child(9n) {
-  background-color: rgb(218, 12, 218);
-}
 
-swiper-slide:nth-child(10n) {
-  background-color: rgb(54, 94, 77);
-}

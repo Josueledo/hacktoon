@@ -1,35 +1,43 @@
+@defer  {
 <app-header></app-header>
 <div class="container">
 
-    <div class="imagem_container">
-        <div class="imagem">
-            <img src="/planta.png" alt="">
-        </div>
-
-        <div class="content">
-
-            <h1>Level {{level}} Suculenta</h1>
-            <div class="descricao">
-                {{falta}} points to the level {{level + 1}} morangueira
-            </div>
-        </div>
+  <div class="imagem_container">
+    <div class="imagem">
+      <img src="{{pontos}}.png" alt="">
     </div>
-    <button (click)="goToMenu()">Get Started</button>
 
+    <div class="content">
 
-    <div class="streak">
-        <div class="title">
-            {{ calcularStreak() }} days streak, keep up!
-        </div>
-        <span>Way to go.</span>
-        <ul class="timeline">
-            <li *ngFor="let d of gerarSemanaAtual()">
-              <div class="day">{{ d.dia }}</div>
-              <div class="circle" [class.green]="d.valido"></div>
-            </li>
-          </ul>
+      <h1>Nível {{level}}</h1>
+      <div class="descricao">
+        {{falta}} pontos para o nível {{level + 1}}
+      </div>
     </div>
-    <div class="menu">
+  </div>
+  <button (click)="goToMenu()">Começar agora</button>
 
+
+  <div class="streak">
+    <div class="title">
+       Sequência de dias!
     </div>
+    <span>Caminho percorrido</span>
+    <ul class="timeline">
+      <li *ngFor="let d of diasStreak">
+        <div class="day" [ngClass]="{ 'green': d.feito, 'gray': !d.feito }">{{ d.dia }}</div>
+        <div class="circle" [ngClass]="{ 'green': d.feito, 'gray': !d.feito }"></div>
+      </li>
+    </ul>
+
+  </div>
+  <div class="menu">
+
+  </div>
 </div>
+}
+@loading {
+  <div class="load">
+    <img src="/logo.webp" alt="logo" width="200px">
+  </div>
+}

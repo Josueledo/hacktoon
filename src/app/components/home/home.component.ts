@@ -3,11 +3,12 @@ import { Component, Inject, PLATFORM_ID, inject } from '@angular/core';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { HeaderComponent } from '../header/header.component';
 import { TarefaService } from '../../services/tarefa.service';
+import { LoadingComponent } from '../loading/loading.component';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [HeaderComponent,CommonModule],
+  imports: [HeaderComponent, CommonModule, LoadingComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
@@ -16,100 +17,94 @@ export class HomeComponent {
   taskService = inject(TarefaService)
   user: any = []
   img: string = ""
-  tasks: any[] = [];
-  taskHoje:any = []
+  tasks: any[] = []; // Alterado para array explícito
+  taskHoje: any = []
+  diasSemana = ['D', 'S', 'T', 'Q', 'Q', 'S', 'S'];
+  diasStreak: { dia: string, feito: boolean }[] = [];
   hoje: string = ''
-  level:number = 0
-  falta:number = 0
+  level: number = 0
+  pontos: number = 0
+  falta: number = 0
+  currentStreak: number = 0; // Adicionado para armazenar o streak atual
   steps: string[] = [
     'agua',
     'sono',
     'exercicio',
     'ar_puro',
     'espiritualidade',
-    'temperança',
+    'temperanca',
     'alimentacao',
     'sol'
   ];
 
   constructor(@Inject(PLATFORM_ID) private platformId: Object) {
     const dataAtual = new Date();
-    const ano = dataAtual.getFullYear();
-    const mes = String(dataAtual.getMonth() + 1).padStart(2, '0');
-    const dia = String(dataAtual.getDate()).padStart(2, '0');
-    this.hoje = `${ano}/${mes}/${dia}`;
+    this.hoje = this.formatarData(dataAtual);
+  }
+
+  // Função auxiliar para formatar datas consistentemente
+  private formatarData(data: Date): string {
+    const ano = data.getFullYear();
+    const mes = String(data.getMonth() + 1).padStart(2, '0');
+    const dia = String(data.getDate()).padStart(2, '0');
+    return `${ano}/${mes}/${dia}`;
   }
 
   ngOnInit() {
-
     if (isPlatformBrowser(this.platformId)) {
       const userString = localStorage.getItem('user');
       if (userString) {
         this.user = JSON.parse(userString);
+        this.pontos = this.user.pontos;
+        this.falta = 7 - this.pontos;
         this.level = this.user.nivel
-        this.falta = 7 - this.level
-        this.taskService.verificarOuCriarTarefa(this.user.id).subscribe(task => {
-          this.taskHoje = [task];
-          console.log("Tarefa carregada/criada:", task);
+        this.img = `${this.user.pontos}.png`;
+
+        this.taskService.verificarOuCriarTarefa(this.user.id).subscribe(() => {
+          this.taskService.getTarefaDoDia(this.user.id).subscribe(task => {
+            this.taskHoje = [task];
+          });
+
+          this.taskService.getTaskToUser(this.user.id).subscribe(taskList => {
+            // Garante que tasks seja sempre um array
+            this.tasks = Array.isArray(taskList) ? taskList : [];
+
+
+            this.preencherDiasStreak();
+          });
         });
       }
-
-     this.taskService.getTarefaDoDia(this.user.id).subscribe(task => {
-      if (task) {
-        this.taskHoje = [task];
-      }else{
-
-        // this.taskService.createTarefa(tarefa).subscribe({
-        //   next:(data) =>{
-        //     alert("task Criada")
-        //   }
-        // })
-      }
-    });
-    this.taskService.getTaskToUser(this.user.id).subscribe(taskList => {
-      if (taskList) {
-        this.tasks = [taskList];
-        console.log(this.tasks)
-      }
-    });
-
-      this.img = `${this.user.pontos}.png`;
     }
   }
 
-  ehConcluido(chave: string, task: any): boolean {
-    const valor = task[chave];
+  preencherDiasStreak() {
+    const hoje = new Date();
+    const primeiroDiaSemana = new Date(hoje);
+    primeiroDiaSemana.setDate(hoje.getDate() - hoje.getDay());
 
-    if (chave === 'agua' || chave === 'sono') {
-      return typeof valor === 'number' && valor > 0;
-    }
-    if (chave === 'exercicio') {
-      return Array.isArray(valor) && valor[0] === 'sim';
-    }
+    this.diasStreak = this.diasSemana.map((letra, index) => {
+      const data = new Date(primeiroDiaSemana);
+      data.setDate(primeiroDiaSemana.getDate() + index);
+      const dataStr = data.toISOString().split('T')[0];
 
-    return valor === true;
-  }
+      const task = this.tasks.find(t => new Date(t.data).toISOString().split('T')[0] === dataStr);
+      const feito = task ? this.isTaskCompletada(task) : false;
 
-  diaValido(task: any): boolean {
-    const completos = this.steps.filter(chave => this.ehConcluido(chave, task)).length;
-    return (completos / this.steps.length) >= 0.6;
+      return { dia: letra, feito };
+    });
   }
 
   calcularStreak(): number {
-    if(this.tasks.length <= 0){
-      return 0
-    }
-      const ordenado = [...this.tasks].sort((a, b) => new Date(b.data).getTime() - new Date(a.data).getTime());
     let streak = 0;
+    const hoje = new Date();
 
-    for (let i = 0; i < ordenado.length; i++) {
-      const diaAtual = new Date(ordenado[i].data);
-      const diaEsperado = new Date();
-      diaEsperado.setDate(diaEsperado.getDate() - streak);
+    while (true) {
+      const data = new Date();
+      data.setDate(hoje.getDate() - streak);
+      const dataStr = data.toISOString().split('T')[0];
 
-      const mesmoDia = diaAtual.toDateString() === diaEsperado.toDateString();
-
-      if (mesmoDia && this.diaValido(ordenado[i])) {
+      const task = this.tasks.find(t => new Date(t.data).toISOString().split('T')[0] === dataStr);
+      if (task && this.isTaskCompletada(task)) {
         streak++;
       } else {
         break;
@@ -119,47 +114,43 @@ export class HomeComponent {
     return streak;
   }
 
-  gerarSemanaAtual(): { dia: string, valido: boolean }[] {
-    const dias: { dia: string, valido: boolean }[] = [];
+  isTaskCompletada(task: any): boolean {
+    if (!task) return false;
 
-    const hoje = new Date();
-    const diaSemana = hoje.getDay(); // 0 = domingo, ..., 6 = sábado
+    const steps = [
+      'agua',
+      'sono',
+      'exercicio',
+      'ar_puro',
+      'espiritualidade',
+      'temperanca',
+      'alimentacao',
+      'sol'
+    ];
 
-    const domingo = new Date(hoje);
-    domingo.setDate(hoje.getDate() - diaSemana);
+    const completos = steps.filter(chave => {
+      const valor = task[chave];
 
-    for (let i = 0; i < 7; i++) {
-      const data = new Date(domingo);
-      data.setDate(domingo.getDate() + i);
+      if (chave === 'agua' || chave === 'sono') {
+        return typeof valor === 'number' && valor > 0;
+      }
 
-      const dataFormatada = data.toISOString().slice(0, 10); // 'YYYY-MM-DD'
+      return valor === true;
+    });
 
-      const taskDoDia = this.tasks.find(t => t.data === dataFormatada);
-      const valido = taskDoDia ? this.diaValido(taskDoDia) : false;
-
-      dias.push({
-        dia: data.toLocaleDateString('pt-BR', { weekday: 'short' }).charAt(0).toUpperCase(),
-        valido
-      });
-    }
-
-    return dias;
+    const percentual = completos.length / steps.length;
+    return percentual >= 0.6;
   }
 
-
-
-
-
   logout() {
-    localStorage.removeItem('user')
+    localStorage.removeItem('user');
     this.router.navigate(['/login']);
-
   }
 
   goToMenu() {
     this.router.navigate(['/menu']);
-
   }
-
-
+  goToUser() {
+    this.router.navigate(['/user']);
+  }
 }

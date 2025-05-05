@@ -38,11 +38,7 @@ export class TarefaService {
     );
   }
   getTaskToUser(userId: number): Observable<any> {
-    const url = `${this.taskUrl}?id_user=${userId}`;
-
-    return this.http.get<any[]>(url).pipe(
-      map(tasks => tasks[0] || null)
-    );
+    return this.http.get<any[]>(`${this.taskUrl}?id_user=${userId}`);
   }
 
   verificarOuCriarTarefa(userId: number): Observable<any> {
@@ -65,7 +61,7 @@ export class TarefaService {
           alimentacao: false,
           ar_puro: false,
           exercicio: false,
-          temperança: false,
+          temperanca: false,
           espiritualidade: false
         };
 
@@ -95,12 +91,12 @@ export class TarefaService {
   updateAlimentacao(id: number, alimentacao: boolean): Observable<any> {
     return this.http.patch(`${this.taskUrl}/${id}`, { alimentacao });
   }
-  updateEspiritualidade(id: number, Espiritualidade: boolean): Observable<any> {
-    return this.http.patch(`${this.taskUrl}/${id}`, { Espiritualidade });
+  updateEspiritualidade(id: number, espiritualidade: boolean): Observable<any> {
+    return this.http.patch(`${this.taskUrl}/${id}`, { espiritualidade });
   }
 
-  updateAr(id: number, ar: boolean): Observable<any> {
-    return this.http.patch(`${this.taskUrl}/${id}`, { ar });
+  updateAr(id: number, ar_puro: boolean): Observable<any> {
+    return this.http.patch(`${this.taskUrl}/${id}`, { ar_puro });
   }
 
 }

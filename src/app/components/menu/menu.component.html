@@ -5,7 +5,7 @@
 
       <fa-icon (click)="back()" [icon]="faChevronLeft"></fa-icon>
 
-      <h1>Get Started</h1>
+      <h1>Meus Objetivos</h1>
     </div>
     <div class="barra_container">
 
@@ -50,168 +50,132 @@
       <swiper-slide>
         <div class="header">
           <fa-icon [icon]="faDroplet"></fa-icon>
+          <h1 class="title">Beber Água</h1>
         </div>
         <div class="content">
-          <div class="progress">
-            <div class="title">Hidratação</div>
-            <span>
-              1000 / 2000ml
-            </span>
-          </div>
-          <span class="qtd">Quantidade em ml.</span>
+
+          <span class="qtd">Quanto de água você bebeu hoje?</span>
           <div class="count">
             <div class="decrease" (click)="decrease()">-</div>
-            <div class="number">{{agualml}}</div>
+            <div class="number">{{agualml}}/ml</div>
             <div class="increase" (click)="increase()">+</div>
           </div>
         </div>
-        <button (click)="updateAgua()">Salvar</button>
       </swiper-slide>
       <swiper-slide>
         <div class="header">
           <fa-icon [icon]="faDumbbell"></fa-icon>
+          <div class="title">Exercicio Fisico</div>
         </div>
         <div class="content">
-          <div class="progress">
-            <div class="title">Exercicio Fisico</div>
-            <span>
-              1move your body!
-            </span>
-          </div>
+
           <span class="qtd">Você se exercitou hoje?</span>
-       
+
         </div>
         <div class="buttons">
-          <button (click)="updateExercicio(true)">Sim</button>
-          <button (click)="updateExercicio(false)">Não</button>
+          <button (click)="updateExercicio(true)">Me exercitei  <fa-icon [icon]="faCheck"></fa-icon></button>
         </div>
       </swiper-slide>
 
       <swiper-slide>
         <div class="header">
           <fa-icon [icon]="faSun"></fa-icon>
+          <div class="title">Luz natural</div>
         </div>
         <div class="content">
-          <div class="progress">
-            <div class="title">Luz natural</div>
-            <span>
-              20 minutos é o ideal!
-            </span>
-          </div>
+
           <span class="qtd">Tomou sol hoje?</span>
-       
+
         </div>
         <div class="buttons">
-          <button (click)="updateSol(true)">Sim</button>
-          <button (click)="updateSol(false)">Não</button>
+          <button (click)="updateSol(true)">Tomei sol <fa-icon [icon]="faCheck"></fa-icon></button>
         </div>
       </swiper-slide>
 
       <swiper-slide>
         <div class="header">
           <fa-icon [icon]="faMoon"></fa-icon>
+          <div class="title">Sono</div>
         </div>
         <div class="content">
-          <div class="progress">
-            <div class="title">Sono</div>
-            <span>
-              É essencial ter um bom sono!
-            </span>
-          </div>
+
           <span class="qtd">Dormiu quantas horas?</span>
-       
-        </div>
-        <div class="count">
-          <div class="decrease" (click)="decreaseSono()">-</div>
-          <div class="number">{{formatarTempo(sono)}}</div>
-          <div class="increase" (click)="increaseSono()">+</div>
+
+          <div class="count">
+            <div class="decrease" (click)="decreaseSono()">-</div>
+            <div class="number">{{formatarTempo(sono)}}</div>
+            <div class="increase" (click)="increaseSono()">+</div>
+          </div>
         </div>
         <div class="buttons">
-          <button (click)="updateSono()">Salvar</button>
         </div>
       </swiper-slide>
-      
+
       <swiper-slide>
         <div class="header">
           <fa-icon [icon]="faScaleBalanced"></fa-icon>
+          <div class="title">Temperança</div>
         </div>
         <div class="content">
-          <div class="progress">
-            <div class="title">Temperança</div>
-            <span>
-              Equilibrio!
-            </span>
-          </div>
-          <span class="qtd">Hoje você teve equilibrio nas suas escolhas?</span>
-       
+
+          <span class="qtd">Hoje você teve equilíbrio nas suas escolhas?</span>
+
         </div>
         <div class="buttons">
-          <button (click)="updateTemperanca(true)">Sim</button>
-          <button (click)="updateTemperanca(false)">Não</button>
+          <button (click)="updateTemperanca(true)">Tive equilíbrio <fa-icon [icon]="faCheck"></fa-icon></button>
         </div>
       </swiper-slide>
 
         <swiper-slide>
         <div class="header">
           <fa-icon [icon]="faBible"></fa-icon>
+          <div class="title">Espiritualidade</div>
         </div>
         <div class="content">
-          <div class="progress">
-            <div class="title">Confiança em Deus</div>
-            <span>
-              Orar, Louvar, Ler a palavra...
-            </span>
-          </div>
+
           <span class="qtd">Hoje você buscou a Deus?</span>
-       
+
         </div>
         <div class="buttons">
-          <button (click)="updateEspiritualidade(true)">Sim</button>
-          <button (click)="updateEspiritualidade(false)">Não</button>
+          <button (click)="updateEspiritualidade(true)">Sim <fa-icon [icon]="faCheck"></fa-icon></button>
         </div>
       </swiper-slide>
 
         <swiper-slide>
         <div class="header">
           <fa-icon [icon]="faCarrot"></fa-icon>
+          <div class="title">Alimentação</div>
         </div>
         <div class="content">
-          <div class="progress">
-            <div class="title">Alimentação</div>
-            <span>
-              Descascar mais, desembalar menos!
-            </span>
-          </div>
+
           <span class="qtd">Hoje você se alimentou bem?</span>
-       
+
         </div>
         <div class="buttons">
-          <button (click)="updateAlimentacao(true)">Sim</button>
-          <button (click)="updateAlimentacao(false)">Não</button>
+          <button (click)="updateAlimentacao(true)">Alimentei bem <fa-icon [icon]="faCheck"></fa-icon></button>
         </div>
       </swiper-slide>
-      
+
       <swiper-slide>
         <div class="header">
           <fa-icon [icon]="faWind"></fa-icon>
+          <div class="title">Ar puro</div>
         </div>
         <div class="content">
-          <div class="progress">
-            <div class="title">Ar puro</div>
-            <span>
-              Respirar fundo ar da natureza!
-            </span>
-          </div>
+
           <span class="qtd">Hoje você respirou ar puro?</span>
-       
+
         </div>
         <div class="buttons">
-          <button (click)="updateAr(true)">Sim</button>
-          <button (click)="updateAr(false)">Não</button>
+          <button (click)="updateAr(true)">Respirei ar puro <fa-icon [icon]="faCheck"></fa-icon></button>
         </div>
       </swiper-slide>
     </swiper-container>
   </div>
 
 
+  <div class="tips">
+      <fa-icon [icon]="faLightbulb"></fa-icon>
+      <span>Mantenha-se hidratado ao praticar exercícios.</span>
+  </div>
 </div>

@@ -51,16 +51,29 @@
       "temperanca": true
     },
     {
-      "id": "d19d",
+      "id": "0ded",
       "id_user": "1",
       "data": "2025/05/04",
-      "agua": 0,
-      "sono": 0,
+      "agua": 250,
+      "sono": 5,
       "sol": true,
-      "alimentacao": false,
-      "ar_puro": false,
+      "alimentacao": true,
+      "ar_puro": true,
       "exercicio": true,
-      "temperança": false,
+      "espiritualidade": true,
+      "temperanca": true
+    },
+    {
+      "id": "b29f",
+      "id_user": "1",
+      "data": "2025/05/05",
+      "agua": 500,
+      "sono": 30,
+      "sol": true,
+      "alimentacao": true,
+      "ar_puro": true,
+      "exercicio": true,
+      "temperanca": true,
       "espiritualidade": false
     }
   ]
